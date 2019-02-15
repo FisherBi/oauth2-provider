@@ -6,7 +6,11 @@
 	<groupId>com.fisherbi</groupId>
 	<artifactId>oauth2-provider</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<modules>
+		<module>oauth2-client</module>
+		<module>oauth2-server</module>
+	</modules>
+	<packaging>pom</packaging>
 
 	<name>oauth2-provider</name>
 	<description>OAuth2.0 Server</description>
