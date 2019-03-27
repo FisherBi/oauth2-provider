@@ -105,6 +105,10 @@ public class OAuthRequest {
         this.multipartPayload = multipartPayload;
     }
 
+    public MultipartPayload getMultipartPayload() {
+        return multipartPayload;
+    }
+
     public void initMultipartPayload() {
         this.multipartPayload = new MultipartPayload();
     }
