@@ -30,13 +30,13 @@ public class PKCEService {
         this(32);
     }
 
-    public PKCE generatePKCE() {
+    public PKCE generatePKCE() throws NoSuchAlgorithmException {
         final byte[] bytes = new byte[numberOFOctets];
         RANDOM.nextBytes(bytes);
         return generatePKCE(bytes);
     }
 
-    public PKCE generatePKCE(byte[] randomBytes) {
+    public PKCE generatePKCE(byte[] randomBytes) throws NoSuchAlgorithmException {
         final String codeVerifier = BASE_64_ENCODER.encodeToString(randomBytes);
 
         final PKCE pkce = new PKCE();
@@ -46,6 +46,7 @@ public class PKCEService {
         } catch (NoSuchAlgorithmException nsaE) {
             pkce.setCodeChallengeMethod(PKCECodeChallengeMethod.plain);
             pkce.setCodeChallenge(PKCECodeChallengeMethod.plain.transform2CodeChallenge(codeVerifier));
+            throw new NoSuchAlgorithmException();
         }
         return pkce;
     }

@@ -11,6 +11,7 @@ import com.fisherbi.client.oauth2.pkce.PKCEService;
 import com.fisherbi.client.oauth2.revoke.TokenTypeHint;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -256,11 +257,11 @@ public class OAuth20Service extends OAuthService {
         signRequest(accessToken == null ? null : accessToken.getAccessToken(), request);
     }
 
-    public AuthorizationUrlWithPKCE getAuthorizationUrlWithPKCE() {
+    public AuthorizationUrlWithPKCE getAuthorizationUrlWithPKCE() throws NoSuchAlgorithmException {
         return getAuthorizationUrlWithPKCE(null);
     }
 
-    public AuthorizationUrlWithPKCE getAuthorizationUrlWithPKCE(Map<String, String> additionalParams) {
+    public AuthorizationUrlWithPKCE getAuthorizationUrlWithPKCE(Map<String, String> additionalParams) throws NoSuchAlgorithmException {
         final PKCE pkce = PKCE_SERVICE.generatePKCE();
         return new AuthorizationUrlWithPKCE(pkce, getAuthorizationUrl(additionalParams, pkce));
     }
