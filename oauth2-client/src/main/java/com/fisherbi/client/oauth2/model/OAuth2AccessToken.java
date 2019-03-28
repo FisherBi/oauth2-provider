@@ -10,44 +10,14 @@ public class OAuth2AccessToken extends Token {
 
     private static final long serialVersionUID = 8901381135476613449L;
 
-    /**
-     * access_token
-     * <p>
-     * REQUIRED. The access token issued by the authorization server.</p>
-     */
     private String accessToken;
 
-    /**
-     * token_type
-     * <p>
-     * REQUIRED. The type of the token issued as described in http://tools.ietf.org/html/rfc6749#section-7.1 Value is
-     * case insensitive.</p>
-     */
     private String tokenType;
 
-    /**
-     * expires_in
-     * <p>
-     * RECOMMENDED. The lifetime in seconds of the access token. For example, the value "3600" denotes that the access
-     * token will expire in one hour from the time the response was generated. If omitted, the authorization server
-     * SHOULD provide the expiration time via other means or document the default value.</p>
-     */
     private Integer expiresIn;
 
-    /**
-     * refresh_token
-     * <p>
-     * OPTIONAL. The refresh token, which can be used to obtain new access tokens using the same authorization grant as
-     * described in http://tools.ietf.org/html/rfc6749#section-6</p>
-     */
     private String refreshToken;
 
-    /**
-     * scope
-     * <p>
-     * OPTIONAL, if identical to the scope requested by the client; otherwise, REQUIRED. The scope of the access token
-     * as described by http://tools.ietf.org/html/rfc6749#section-3.3</p>
-     */
     private String scope;
 
     public OAuth2AccessToken(String accessToken) {

@@ -34,18 +34,11 @@ public class OAuth20Service extends OAuthService {
         this.api = api;
     }
 
-    //protected to facilitate mocking
     protected OAuth2AccessToken sendAccessTokenRequestSync(OAuthRequest request)
             throws IOException, InterruptedException, ExecutionException {
         return api.getAccessTokenExtractor().extract(execute(request));
     }
 
-    //protected to facilitate mocking
-    protected Future<OAuth2AccessToken> sendAccessTokenRequestAsync(OAuthRequest request) {
-        return sendAccessTokenRequestAsync(request, null);
-    }
-
-    //protected to facilitate mocking
     protected Future<OAuth2AccessToken> sendAccessTokenRequestAsync(OAuthRequest request,
             OAuthAsyncRequestCallback<OAuth2AccessToken> callback) {
 
@@ -55,14 +48,6 @@ public class OAuth20Service extends OAuthService {
                 return getApi().getAccessTokenExtractor().extract(response);
             }
         });
-    }
-
-    public Future<OAuth2AccessToken> getAccessTokenAsync(String code) {
-        return getAccessToken(code, null, null);
-    }
-
-    public Future<OAuth2AccessToken> getAccessTokenAsync(String code, String pkceCodeVerifier) {
-        return getAccessToken(code, null, pkceCodeVerifier);
     }
 
     public OAuth2AccessToken getAccessToken(String code) throws IOException, InterruptedException, ExecutionException {
@@ -76,15 +61,6 @@ public class OAuth20Service extends OAuthService {
         return sendAccessTokenRequestSync(request);
     }
 
-    /**
-     * Start the request to retrieve the access token. The optionally provided callback will be called with the Token
-     * when it is available.
-     *
-     * @param code code
-     * @param callback optional callback
-     * @param pkceCodeVerifier pkce Code Verifier
-     * @return Future
-     */
     public Future<OAuth2AccessToken> getAccessToken(String code, OAuthAsyncRequestCallback<OAuth2AccessToken> callback,
             String pkceCodeVerifier) {
         final OAuthRequest request = createAccessTokenRequest(code, pkceCodeVerifier);
@@ -171,14 +147,6 @@ public class OAuth20Service extends OAuthService {
         return getAccessTokenPasswordGrantAsync(uname, password, null);
     }
 
-    /**
-     * Request Access Token Password Grant async version
-     *
-     * @param uname User name
-     * @param password User password
-     * @param callback Optional callback
-     * @return Future
-     */
     public Future<OAuth2AccessToken> getAccessTokenPasswordGrantAsync(String uname, String password,
             OAuthAsyncRequestCallback<OAuth2AccessToken> callback) {
         final OAuthRequest request = createAccessTokenPasswordGrantRequest(uname, password);
@@ -214,13 +182,6 @@ public class OAuth20Service extends OAuthService {
         return sendAccessTokenRequestSync(request);
     }
 
-    /**
-     * Start the request to retrieve the access token using client-credentials grant. The optionally provided callback
-     * will be called with the Token when it is available.
-     *
-     * @param callback optional callback
-     * @return Future
-     */
     public Future<OAuth2AccessToken> getAccessTokenClientCredentialsGrant(
             OAuthAsyncRequestCallback<OAuth2AccessToken> callback) {
         final OAuthRequest request = createAccessTokenClientCredentialsGrantRequest();
@@ -241,9 +202,6 @@ public class OAuth20Service extends OAuthService {
         return request;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getVersion() {
         return VERSION;
@@ -266,21 +224,10 @@ public class OAuth20Service extends OAuthService {
         return new AuthorizationUrlWithPKCE(pkce, getAuthorizationUrl(additionalParams, pkce));
     }
 
-    /**
-     * Returns the URL where you should redirect your users to authenticate your application.
-     *
-     * @return the URL where you should redirect your users
-     */
     public String getAuthorizationUrl() {
         return getAuthorizationUrl(null, null);
     }
 
-    /**
-     * Returns the URL where you should redirect your users to authenticate your application.
-     *
-     * @param additionalParams any additional GET params to add to the URL
-     * @return the URL where you should redirect your users
-     */
     public String getAuthorizationUrl(Map<String, String> additionalParams) {
         return getAuthorizationUrl(additionalParams, null);
     }
@@ -374,7 +321,7 @@ public class OAuth20Service extends OAuthService {
                     case "state":
                         authorization.setState(keyValue[1]);
                         break;
-                    default: //just ignore any other param;
+                    default:
                 }
             }
         }

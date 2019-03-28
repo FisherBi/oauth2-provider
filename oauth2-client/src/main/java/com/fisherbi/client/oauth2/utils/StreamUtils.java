@@ -6,9 +6,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.zip.GZIPInputStream;
 
-/**
- * Utils to deal with Streams.
- */
 public abstract class StreamUtils {
 
     public static String getStreamContents(InputStream is) throws IOException {

@@ -11,9 +11,6 @@ import java.net.URI;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * JSON (default) implementation of {@link TokenExtractor} for OAuth 2.0
- */
 public class OAuth2AccessTokenJsonExtractor implements TokenExtractor<OAuth2AccessToken> {
 
     private static final Pattern ACCESS_TOKEN_REGEX_PATTERN = Pattern.compile("\"access_token\"\\s*:\\s*\"(\\S*?)\"");
@@ -49,11 +46,6 @@ public class OAuth2AccessTokenJsonExtractor implements TokenExtractor<OAuth2Acce
         return createToken(body);
     }
 
-    /**
-     * Related documentation: https://tools.ietf.org/html/rfc6749#section-5.2
-     *
-     * @param response response
-     */
     public void generateError(String response) {
         final String errorInString = extractParameter(response, ERROR_REGEX_PATTERN, true);
         final String errorDescription = extractParameter(response, ERROR_DESCRIPTION_REGEX_PATTERN, false);

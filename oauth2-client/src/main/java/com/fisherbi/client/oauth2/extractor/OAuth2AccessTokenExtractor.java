@@ -10,9 +10,6 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Custom implementation of {@link TokenExtractor} for OAuth 2.0
- */
 public class OAuth2AccessTokenExtractor implements TokenExtractor<OAuth2AccessToken> {
 
     private static final Pattern ACCESS_TOKEN_REGEX_PATTERN = Pattern.compile("access_token=([^&]+)");
@@ -33,9 +30,6 @@ public class OAuth2AccessTokenExtractor implements TokenExtractor<OAuth2AccessTo
         return InstanceHolder.INSTANCE;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public OAuth2AccessToken extract(Response response) throws IOException {
         if (response.getCode() != 200) {
