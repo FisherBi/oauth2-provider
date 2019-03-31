@@ -227,32 +227,17 @@ public class OAuthRequest {
         multipartPayload.addBodyPart(fileByteArrayBodyPartPayload);
     }
 
-    /**
-     * Set body payload. This method is used when the HTTP body is not a form-url-encoded string, but another thing.
-     * Like for example XML. Note: The contents are not part of the OAuth signature
-     *
-     * @param payload the body of the request
-     */
     public void setPayload(String payload) {
         resetPayload();
         stringPayload = payload;
     }
 
-    /**
-     * Overloaded version for byte arrays
-     *
-     * @param payload byte[]
-     */
     public void setPayload(byte[] payload) {
         resetPayload();
         byteArrayPayload = payload.clone();
     }
 
-    /**
-     * Overloaded version for File
-     *
-     * @param payload File
-     */
+
     public void setPayload(File payload) {
         resetPayload();
         filePayload = payload;
@@ -265,12 +250,6 @@ public class OAuthRequest {
         multipartPayload = null;
     }
 
-    /**
-     * Get a {@link ParameterList} with the query string parameters.
-     *
-     * @return a {@link ParameterList} containing the query string parameters.
-     * @throws OAuthException if the request URL is not valid.
-     */
     public ParameterList getQueryStringParams() {
         try {
             final ParameterList result = new ParameterList();
@@ -283,29 +262,14 @@ public class OAuthRequest {
         }
     }
 
-    /**
-     * Obtains a {@link ParameterList} of the body parameters.
-     *
-     * @return a {@link ParameterList}containing the body parameters.
-     */
     public ParameterList getBodyParams() {
         return bodyParams;
     }
 
-    /**
-     * Obtains the URL of the HTTP Request.
-     *
-     * @return the original URL of the HTTP Request
-     */
     public String getUrl() {
         return url;
     }
 
-    /**
-     * Returns the URL without the port and the query string part.
-     *
-     * @return the OAuth-sanitized URL
-     */
     public String getSanitizedUrl() {
         if (url.startsWith("http://") && (url.endsWith(":80") || url.contains(":80/"))) {
             return url.replaceAll("\\?.*", "").replaceAll(":80", "");
@@ -316,19 +280,10 @@ public class OAuthRequest {
         }
     }
 
-    /**
-     * Returns the body of the request (set in {@link #setPayload(String)})
-     *
-     * @return form encoded string
-     */
     public String getStringPayload() {
         return stringPayload;
     }
 
-    /**
-     * @return the body of the request (set in {@link #setPayload(byte[])} or in
-     * {@link #addBodyParameter(String, String)} )
-     */
     public byte[] getByteArrayPayload() {
         if (byteArrayPayload != null) {
             return byteArrayPayload;
@@ -362,11 +317,6 @@ public class OAuthRequest {
         return charset == null ? Charset.defaultCharset().name() : charset;
     }
 
-    /**
-     * Set the charset of the body of the request
-     *
-     * @param charsetName name of the charset of the request
-     */
     public void setCharset(String charsetName) {
         charset = charsetName;
     }

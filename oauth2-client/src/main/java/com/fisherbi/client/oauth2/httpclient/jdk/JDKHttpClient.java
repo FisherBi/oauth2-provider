@@ -65,7 +65,7 @@ public class JDKHttpClient implements HttpClient {
     @Override
     public <T> Future<T> executeAsync(String userAgent, Map<String, String> headers, HttpMethod httpHttpMethod, String completeUrl,
             File bodyContents, OAuthAsyncRequestCallback<T> callback, OAuthRequest.ResponseConverter<T> converter) {
-        throw new UnsupportedOperationException("JDKHttpClient does not support File payload for the moment");
+        throw new UnsupportedOperationException("JDKHttpClient暂时不支持文件File payload");
     }
 
     private <T> Future<T> doExecuteAsync(String userAgent, Map<String, String> headers, HttpMethod httpHttpMethod,
@@ -108,7 +108,7 @@ public class JDKHttpClient implements HttpClient {
     @Override
     public Response execute(String userAgent, Map<String, String> headers, HttpMethod httpHttpMethod, String completeUrl,
             File bodyContents) throws InterruptedException, ExecutionException, IOException {
-        throw new UnsupportedOperationException("JDKHttpClient does not support File payload for the moment");
+        throw new UnsupportedOperationException("JDKHttpClient暂时不支持文件File payload");
     }
 
     private Response doExecute(String userAgent, Map<String, String> headers, HttpMethod httpHttpMethod, String completeUrl,
@@ -134,7 +134,7 @@ public class JDKHttpClient implements HttpClient {
                     responseCode >= 200 && responseCode < 400 ? connection.getInputStream()
                             : connection.getErrorStream());
         } catch (UnknownHostException e) {
-            throw new OAuthException("The IP address of a host could not be determined.", e);
+            throw new OAuthException("无法确定主机的IP地址。", e);
         }
     }
 

@@ -38,15 +38,6 @@ public class JDKHttpClientConfig implements HttpClientConfig {
         return followRedirects;
     }
 
-    /**
-     * Sets whether the underlying Http Connection follows redirects or not.
-     *
-     * Defaults to true (follow redirects)
-     *
-     * @see <a
-     * href="http://docs.oracle.com/javase/6/docs/api/java/net/HttpURLConnection.html#setInstanceFollowRedirects(boolean)">http://docs.oracle.com/javase/6/docs/api/java/net/HttpURLConnection.html#setInstanceFollowRedirects(boolean)</a>
-     * @param followRedirects boolean
-     */
     public void setFollowRedirects(boolean followRedirects) {
         this.followRedirects = followRedirects;
     }
